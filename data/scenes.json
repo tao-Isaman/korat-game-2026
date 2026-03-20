@@ -29,7 +29,13 @@
   {
 	"id": "scene_02",
 	"title": "ฉาก 2 — ห้องน้ำ",
-	"videos": [],
+	"videos": [
+	  "res://data/scene_2/toilet2.ogv",
+	  "res://data/scene_2/toilet3.ogv",
+	  "res://data/scene_2/toilet4.ogv",
+	  "res://data/scene_2/toilet5.ogv",
+	  "res://data/scene_2/toilet6.ogv"
+	],
 	"loop_video": "",
 	"duration": 5.0,
 	"choices": [],
@@ -39,9 +45,9 @@
 	"id": "scene_03",
 	"title": "ฉาก 3 — ห้องเรียน",
 	"videos": [
-	  "res://data/scene_2/s2.1.ogv",
-	  "res://data/scene_2/s2.2.ogv",
-      "res://data/scene_2/s3-new.ogv"
+	  "res://data/scene_3/s2.1.ogv",
+	  "res://data/scene_3/s2.2.ogv",
+      "res://data/scene_3/s3-new.ogv"
 	],
 	"duration": 5.0,
 	"choices": [],

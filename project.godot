@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="korat-game"
-run/main_scene="res://scenes/fmv/Main.tscn"
+run/main_scene="uid://vvhoayoa3s23"
 config/features=PackedStringArray("4.6", "Mobile")
 config/icon="res://icon.svg"
 
