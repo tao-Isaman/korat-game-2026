@@ -1,0 +1,42 @@
+# Godot 4+ specific ignores
+.godot/
+
+# Godot exported builds
+/android/
+/build/
+/export/
+*.apk
+*.aab
+*.ipa
+*.exe
+*.x86_64
+*.x86
+*.dmg
+*.app
+*.pck
+*.zip
+
+# Godot mono (C#)
+.mono/
+data_*/
+mono_crash.*.json
+
+# Import backups
+*.import.bak
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
