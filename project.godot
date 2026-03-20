@@ -11,8 +11,13 @@ config_version=5
 [application]
 
 config/name="korat-game"
+run/main_scene="res://scenes/fmv/Main.tscn"
 config/features=PackedStringArray("4.6", "Mobile")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GameManager="*res://scripts/fmv/GameManager.gd"
 
 [physics]
 

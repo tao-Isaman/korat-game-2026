@@ -1,0 +1,133 @@
+[
+  {
+    "id": "scene_01",
+    "title": "ฉาก 1 — หน้าอาคาร",
+    "video": "",
+    "duration": 5.0,
+    "choices": [
+      { "id": "choice_bathroom", "icon": "🚻", "label": "ห้องน้ำ", "next": "scene_02" },
+      { "id": "choice_class", "icon": "📚", "label": "ไปเรียน", "next": "scene_03" }
+    ]
+  },
+  {
+    "id": "scene_02",
+    "title": "ฉาก 2 — ห้องน้ำ",
+    "video": "",
+    "duration": 5.0,
+    "choices": [],
+    "next": "scene_03"
+  },
+  {
+    "id": "scene_03",
+    "title": "ฉาก 3 — ห้องเรียน",
+    "video": "",
+    "duration": 5.0,
+    "choices": [],
+    "next": "scene_04"
+  },
+  {
+    "id": "scene_04",
+    "title": "ฉาก 4 — หน้าห้องเรียน",
+    "video": "",
+    "duration": 5.0,
+    "choices": [
+      { "id": "choice_eat", "icon": "🍚", "label": "ไปกินข้าว", "next": "scene_05" },
+      { "id": "choice_skip", "icon": "🔙", "label": "ไม่ไป", "next": "scene_end_placeholder" }
+    ]
+  },
+  {
+    "id": "scene_05",
+    "title": "ฉาก 5 — โรงอาหาร",
+    "video": "",
+    "duration": 5.0,
+    "choices": [],
+    "next": "scene_06"
+  },
+  {
+    "id": "scene_06",
+    "title": "ฉาก 6 — โรงอาหาร บรรยากาศเปลี่ยน",
+    "video": "",
+    "duration": 5.0,
+    "choices": [
+      { "id": "choice_merit_done", "icon": "🙏", "label": "พึ่งไปทำมา", "next": "scene_end_placeholder" },
+      { "id": "choice_merit_go", "icon": "❌", "label": "ไม่ได้ไปเลย", "next": "scene_07" }
+    ]
+  },
+  {
+    "id": "scene_07",
+    "title": "ฉาก 7 — วัด",
+    "video": "",
+    "duration": 5.0,
+    "choices": [],
+    "next": "scene_08"
+  },
+  {
+    "id": "scene_08",
+    "title": "ฉาก 8 — ลานวัด",
+    "video": "",
+    "duration": 5.0,
+    "choices": [
+      { "id": "choice_go_home", "icon": "🚶", "label": "กลับพร้อมกัน", "next": "scene_end_placeholder" },
+      { "id": "choice_stay", "icon": "🌳", "label": "อยู่ต่อ", "next": "scene_09" }
+    ]
+  },
+  {
+    "id": "scene_09",
+    "title": "ฉาก 9 — ป่าหลังวัด",
+    "video": "",
+    "duration": 5.0,
+    "choices": [],
+    "next": "scene_10"
+  },
+  {
+    "id": "scene_10",
+    "title": "ฉาก 10 — แป้งปรากฏ",
+    "video": "",
+    "duration": 5.0,
+    "choices": [],
+    "next": "scene_11"
+  },
+  {
+    "id": "scene_11",
+    "title": "ฉาก 11 — กลับบ้านด้วยกันไหม",
+    "video": "",
+    "duration": 5.0,
+    "choices": [
+      { "id": "choice_stay_alive", "icon": "✅", "label": "ไม่กลับ", "next": "scene_tbc" },
+      { "id": "choice_bad_end", "icon": "☠️", "label": "กลับ", "next": "scene_bad_end" }
+    ]
+  },
+  {
+    "id": "scene_end_placeholder",
+    "title": "ฉากนี้ยังไม่ได้เขียน",
+    "video": "",
+    "duration": 3.0,
+    "choices": [],
+    "next": "scene_main_menu"
+  },
+  {
+    "id": "scene_tbc",
+    "title": "TO BE CONTINUED",
+    "video": "",
+    "duration": 3.0,
+    "choices": [],
+    "next": "scene_main_menu"
+  },
+  {
+    "id": "scene_bad_end",
+    "title": "BAD END",
+    "video": "",
+    "duration": 3.0,
+    "choices": [],
+    "next": "scene_main_menu"
+  },
+  {
+    "id": "scene_main_menu",
+    "title": "MAIN MENU",
+    "video": "",
+    "duration": 0.0,
+    "choices": [
+      { "id": "choice_restart", "icon": "▶️", "label": "เล่นใหม่", "next": "scene_01" }
+    ]
+  }
+]
