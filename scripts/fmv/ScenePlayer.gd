@@ -1,6 +1,7 @@
 extends Control
 
 const FADE_DURATION := 0.3
+const VIDEO_FADE_EARLY := 0.3
 
 var _is_transitioning: bool = false
 var _pending_choices: Array = []
@@ -8,6 +9,7 @@ var _video_queue: Array = []
 var _video_index: int = 0
 var _loop_video_path: String = ""
 var _current_player: VideoStreamPlayer = null
+var _fade_started_early: bool = false
 
 @onready var background: ColorRect = $Background
 @onready var title_label: Label = $TitleLabel
@@ -114,6 +116,7 @@ func _play_next_video() -> void:
 		return
 
 	_clear_video()
+	_fade_started_early = false
 	_current_player = _create_video_player(stream, false)
 	_current_player.finished.connect(_on_video_finished, CONNECT_ONE_SHOT)
 	_current_player.play()
@@ -122,16 +125,39 @@ func _play_next_video() -> void:
 func _on_video_finished() -> void:
 	_video_index += 1
 	if _video_index < _video_queue.size():
-		# Fade between videos
 		_transition_to_next_video()
 	else:
-		call_deferred("_play_next_video")
+		_transition_to_next_video()
 
 
 func _transition_to_next_video() -> void:
-	await _fade_in()
+	# If early fade didn't trigger, do it now
+	if not _fade_started_early:
+		await _fade_in()
+	else:
+		# Wait for the early fade to finish
+		while fade_rect.color.a < 1.0:
+			await get_tree().process_frame
 	_play_next_video()
 	await _fade_out()
+
+
+func _check_early_fade() -> void:
+	# Start fade before video ends so transition feels smooth
+	if _current_player == null or not is_instance_valid(_current_player):
+		return
+	if _fade_started_early:
+		return
+	if not _current_player.is_playing():
+		return
+
+	var length := _current_player.get_stream_length()
+	var pos := _current_player.stream_position
+	var remaining := length - pos
+
+	if length > 0.0 and remaining <= VIDEO_FADE_EARLY + FADE_DURATION and remaining > 0.0:
+		_fade_started_early = true
+		_fade_in()
 
 
 func _on_all_videos_finished() -> void:
@@ -160,20 +186,42 @@ func _play_loop_video() -> void:
 		_current_player.play()
 
 
+var _cover_rect: TextureRect = null
+
 func _create_video_player(stream: Resource, loop: bool) -> VideoStreamPlayer:
 	var player := VideoStreamPlayer.new()
 	player.stream = stream
 	player.loop = loop
+	# Hide the player visually — we use TextureRect to display the video
+	player.visible = false
 	video_container.add_child(player)
-	player.anchor_left = 0.0
-	player.anchor_top = 0.0
-	player.anchor_right = 1.0
-	player.anchor_bottom = 1.0
-	player.offset_left = 0
-	player.offset_top = 0
-	player.offset_right = 0
-	player.offset_bottom = 0
+
+	# TextureRect with STRETCH_COVER to fill screen without black bars
+	_cover_rect = TextureRect.new()
+	_cover_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	_cover_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	video_container.add_child(_cover_rect)
+	_cover_rect.anchor_left = 0.0
+	_cover_rect.anchor_top = 0.0
+	_cover_rect.anchor_right = 1.0
+	_cover_rect.anchor_bottom = 1.0
+	_cover_rect.offset_left = 0
+	_cover_rect.offset_top = 0
+	_cover_rect.offset_right = 0
+	_cover_rect.offset_bottom = 0
+
 	return player
+
+
+func _process(_delta: float) -> void:
+	# Update TextureRect with video texture each frame
+	if _current_player and is_instance_valid(_current_player) and _current_player.is_playing():
+		var tex = _current_player.get_video_texture()
+		if tex and _cover_rect and is_instance_valid(_cover_rect):
+			_cover_rect.texture = tex
+
+	# Start fade before video ends for smooth transition
+	_check_early_fade()
 
 
 func _clear_video() -> void:
@@ -181,6 +229,7 @@ func _clear_video() -> void:
 		_current_player.stop()
 		if _current_player.finished.is_connected(_on_video_finished):
 			_current_player.finished.disconnect(_on_video_finished)
+	_cover_rect = null
 	for child in video_container.get_children():
 		video_container.remove_child(child)
 		child.queue_free()

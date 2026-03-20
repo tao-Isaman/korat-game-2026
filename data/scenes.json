@@ -19,7 +19,7 @@
 	  {
 		"id": "choice_class",
 		"icon": "",
-		"label": "ไปเรียนใบเตย",
+		"label": "ไปเรียนกับใบเตย",
 		"next": "scene_03"
 	  }
 	]
@@ -27,7 +27,8 @@
   {
 	"id": "scene_02",
 	"title": "ฉาก 2 — ห้องน้ำ",
-	"video": "",
+	"videos": [],
+	"loop_video": "",
 	"duration": 5.0,
 	"choices": [],
 	"next": "scene_03"
@@ -35,7 +36,11 @@
   {
 	"id": "scene_03",
 	"title": "ฉาก 3 — ห้องเรียน",
-	"video": "",
+	"videos": [
+	  "res://data/scene_2/s2.1.ogv",
+	  "res://data/scene_2/s2.2.ogv",
+      "res://data/scene_2/s3-new.ogv"
+	],
 	"duration": 5.0,
 	"choices": [],
 	"next": "scene_04"
@@ -43,7 +48,8 @@
   {
 	"id": "scene_04",
 	"title": "ฉาก 4 — หน้าห้องเรียน",
-	"video": "",
+	"videos": ["res://data/scene_4/s4.ogv", "res://data/scene_4/s4-1.ogv"],
+	"loop_video": "res://data/scene_4/loop-scene-s4.ogv",
 	"duration": 5.0,
 	"choices": [
 	  {
@@ -63,7 +69,12 @@
   {
 	"id": "scene_05",
 	"title": "ฉาก 5 — โรงอาหาร",
-	"video": "",
+	"videos": [
+	  "res://data/scene_5/s5.ogv",
+	  "res://data/scene_5/s5-1.ogv",
+	  "res://data/scene_5/s5-2.ogv",
+      "res://data/scene_5/s5-3.ogv"
+	],
 	"duration": 5.0,
 	"choices": [],
 	"next": "scene_06"
@@ -71,7 +82,7 @@
   {
 	"id": "scene_06",
 	"title": "ฉาก 6 — โรงอาหาร บรรยากาศเปลี่ยน",
-	"video": "",
+	"videos": ["res://data/scene_6/s6-1.ogv", "res://data/scene_6/s6-2.ogv"],
 	"duration": 5.0,
 	"choices": [
 	  {
