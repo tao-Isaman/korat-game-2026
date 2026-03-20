@@ -21,8 +21,8 @@ func show_choices(choices: Array) -> void:
 			btn.text = "%s %s" % [icon, label]
 		else:
 			btn.text = icon
-		btn.custom_minimum_size = Vector2(140, 50)
-		btn.add_theme_font_size_override("font_size", 20)
+		btn.custom_minimum_size = Vector2(250, 80)
+		btn.add_theme_font_size_override("font_size", 32)
 
 		var next_id: String = choice.get("next", "")
 		btn.pressed.connect(_on_button_pressed.bind(next_id))

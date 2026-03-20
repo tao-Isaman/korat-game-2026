@@ -82,7 +82,12 @@
   {
 	"id": "scene_06",
 	"title": "ฉาก 6 — โรงอาหาร บรรยากาศเปลี่ยน",
-	"videos": ["res://data/scene_6/s6-1.ogv", "res://data/scene_6/s6-2.ogv"],
+	"videos": [
+	  "res://data/scene_6/s6-1.ogv",
+	  "res://data/scene_6/s6-2.ogv",
+      "res://data/scene_6/s6-3.ogv"
+	],
+	"loop_video": "res://data/scene_6/s6-loop.ogv",
 	"duration": 5.0,
 	"choices": [
 	  {
