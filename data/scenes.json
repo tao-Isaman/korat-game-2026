@@ -2,20 +2,24 @@
   {
 	"id": "scene_01",
 	"title": "ฉาก 1 — หน้าอาคาร",
-	"videos": ["res://data/scene_1/1.1.ogv"],
-	"loop_video": "",
+	"videos": [
+	  "res://data/scene_1/s1.1.ogv",
+	  "res://data/scene_1/s1.2.ogv",
+      "res://data/scene_1/s1.3.ogv"
+	],
+	"loop_video": "res://data/scene_1/s1.4.ogv",
 	"duration": 5.0,
 	"choices": [
 	  {
 		"id": "choice_bathroom",
 		"icon": "",
-		"label": "ห้องน้ำ",
+		"label": "ไปห้องน้ำก่อน",
 		"next": "scene_02"
 	  },
 	  {
 		"id": "choice_class",
 		"icon": "",
-		"label": "ไปเรียน",
+		"label": "ไปเรียนใบเตย",
 		"next": "scene_03"
 	  }
 	]

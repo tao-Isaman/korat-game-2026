@@ -115,13 +115,23 @@ func _play_next_video() -> void:
 
 	_clear_video()
 	_current_player = _create_video_player(stream, false)
-	_current_player.finished.connect(_on_video_finished)
+	_current_player.finished.connect(_on_video_finished, CONNECT_ONE_SHOT)
 	_current_player.play()
 
 
 func _on_video_finished() -> void:
 	_video_index += 1
+	if _video_index < _video_queue.size():
+		# Fade between videos
+		_transition_to_next_video()
+	else:
+		call_deferred("_play_next_video")
+
+
+func _transition_to_next_video() -> void:
+	await _fade_in()
 	_play_next_video()
+	await _fade_out()
 
 
 func _on_all_videos_finished() -> void:
@@ -168,6 +178,7 @@ func _create_video_player(stream: Resource, loop: bool) -> VideoStreamPlayer:
 
 func _clear_video() -> void:
 	if _current_player and is_instance_valid(_current_player):
+		_current_player.stop()
 		if _current_player.finished.is_connected(_on_video_finished):
 			_current_player.finished.disconnect(_on_video_finished)
 	for child in video_container.get_children():

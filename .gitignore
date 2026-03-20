@@ -41,4 +41,6 @@ Desktop.ini
 *.swo
 *~
 
-data/*
+*.mp4
+*.ogv
+*.ogv.uid
