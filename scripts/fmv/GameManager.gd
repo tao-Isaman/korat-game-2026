@@ -3,12 +3,30 @@ extends Node
 const SCENES_PATH := "res://data/scenes.json"
 const FIRST_SCENE := "scene_01"
 
+const CHARACTERS := ["paeng", "baitoey", "beam", "ploy"]
+const CHARACTER_NAMES := {
+	"paeng": "แป้ง",
+	"baitoey": "ใบเตย",
+	"beam": "บีม",
+	"ploy": "พลอย"
+}
+
 var scenes_data: Dictionary = {}
 var current_scene_id: String = ""
 var scene_player: Node = null
 
+# Relationship points per character (0-100)
+var relationships: Dictionary = {}
+
+signal relationship_changed(character: String, value: int)
+
 
 func _ready() -> void:
+	_load_scenes()
+	reset_relationships()
+
+
+func _load_scenes() -> void:
 	var file := FileAccess.open(SCENES_PATH, FileAccess.READ)
 	if file == null:
 		push_error("Failed to open scenes.json: " + str(FileAccess.get_open_error()))
@@ -22,13 +40,42 @@ func _ready() -> void:
 		push_error("Failed to parse scenes.json at line %d: %s" % [json.get_error_line(), json.get_error_message()])
 		return
 
-	# Convert array to dictionary keyed by "id"
 	if json.data is Array:
 		for scene in json.data:
 			if scene is Dictionary and scene.has("id"):
 				scenes_data[scene["id"]] = scene
 	else:
 		push_error("scenes.json root must be an Array")
+
+
+func reset_relationships() -> void:
+	for c in CHARACTERS:
+		relationships[c] = 0
+
+
+func get_relationship(character: String) -> int:
+	return relationships.get(character, 0)
+
+
+func get_character_name(character: String) -> String:
+	return CHARACTER_NAMES.get(character, character)
+
+
+func add_relationship(character: String, amount: int) -> void:
+	if not relationships.has(character):
+		return
+	relationships[character] = clampi(relationships[character] + amount, 0, 100)
+	relationship_changed.emit(character, relationships[character])
+
+
+func apply_choice_relationships(choice: Dictionary) -> Array:
+	var changes: Array = []
+	var rel: Dictionary = choice.get("relationship", {})
+	for character in rel:
+		var amount: int = int(rel[character])
+		add_relationship(character, amount)
+		changes.append(amount)
+	return changes
 
 
 func get_scene(id: String) -> Dictionary:

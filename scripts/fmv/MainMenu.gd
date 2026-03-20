@@ -21,6 +21,7 @@ func _ready() -> void:
 
 
 func _on_new_game() -> void:
+	GameManager.reset_relationships()
 	get_tree().change_scene_to_file("res://scenes/fmv/ScenePlayer.tscn")
 
 

@@ -14,13 +14,15 @@
 		"id": "choice_bathroom",
 		"icon": "",
 		"label": "ไปห้องน้ำก่อน",
-		"next": "scene_02"
+		"next": "scene_02",
+		"relationship": {}
 	  },
 	  {
 		"id": "choice_class",
 		"icon": "",
 		"label": "ไปเรียนกับใบเตย",
-		"next": "scene_03"
+		"next": "scene_03",
+		"relationship": { "baitoey": 10 }
 	  }
 	]
   },
@@ -56,13 +58,15 @@
 		"id": "choice_eat",
 		"icon": "",
 		"label": "ไปกินข้าว",
-		"next": "scene_05"
+		"next": "scene_05",
+		"relationship": { "baitoey": 5 }
 	  },
 	  {
 		"id": "choice_skip",
 		"icon": "",
 		"label": "ไม่ไป",
-		"next": "scene_end_placeholder"
+		"next": "scene_end_placeholder",
+		"relationship": { "baitoey": -5 }
 	  }
 	]
   },
@@ -94,13 +98,15 @@
 		"id": "choice_merit_done",
 		"icon": "",
 		"label": "พึ่งไปทำมา",
-		"next": "scene_end_placeholder"
+		"next": "scene_end_placeholder",
+		"relationship": { "paeng": 5 }
 	  },
 	  {
 		"id": "choice_merit_go",
 		"icon": "",
 		"label": "ไม่ได้ไปเลย",
-		"next": "scene_07"
+		"next": "scene_07",
+		"relationship": { "paeng": 10, "baitoey": 10 }
 	  }
 	]
   },
@@ -122,13 +128,15 @@
 		"id": "choice_go_home",
 		"icon": "",
 		"label": "กลับพร้อมกัน",
-		"next": "scene_end_placeholder"
+		"next": "scene_end_placeholder",
+		"relationship": { "beam": 10 }
 	  },
 	  {
 		"id": "choice_stay",
 		"icon": "",
 		"label": "อยู่ต่อ",
-		"next": "scene_09"
+		"next": "scene_09",
+		"relationship": { "paeng": 10 }
 	  }
 	]
   },
@@ -158,13 +166,15 @@
 		"id": "choice_stay_alive",
 		"icon": "",
 		"label": "ไม่กลับ",
-		"next": "scene_tbc"
+		"next": "scene_tbc",
+		"relationship": { "paeng": -10 }
 	  },
 	  {
 		"id": "choice_bad_end",
 		"icon": "",
 		"label": "กลับ",
-		"next": "scene_bad_end"
+		"next": "scene_bad_end",
+		"relationship": { "paeng": 15 }
 	  }
 	]
   },

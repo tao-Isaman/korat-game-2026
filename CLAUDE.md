@@ -1,21 +1,112 @@
 # CLAUDE.md — korat-game
 
 ## Project overview
-Godot 4.6 game project ("korat-game") using the Mobile renderer and Jolt Physics 3D engine.
+FMV interactive story game called "แฟนเก่า" built in Godot 4.6. Data-driven scene flow with video playback, branching choices, and character relationship system.
 
 ## Tech stack
-- **Engine**: Godot 4.6
-- **Scripting**: GDScript (default for this project)
-- **Physics**: Jolt Physics (3D)
+- **Engine**: Godot 4.6.1
+- **Scripting**: GDScript
 - **Renderer**: Mobile (`renderer/rendering_method="mobile"`)
+- **Viewport**: 1920x1080, stretch mode `canvas_items`
+- **Video format**: OGV (Theora + Vorbis) only — Godot 4 does NOT support MP4/WebM
 - **Platform targets**: macOS (primary dev), Windows (D3D12)
 
 ## Project structure
 ```
-project.godot        # Main Godot project config
-icon.svg             # Default project icon
-.godot/              # Godot internal cache (gitignored)
+project.godot
+data/
+  scenes.json              # Scene definitions (all game flow data)
+  scene_1/                 # Video files per scene (gitignored)
+  scene_2/
+  ...
+scenes/fmv/
+  Main.tscn                # Entry point → MainMenu
+  MainMenu.tscn            # Title screen with menu buttons
+  ScenePlayer.tscn         # Video player + choices overlay
+  ChoiceOverlay.tscn       # Dynamic choice buttons (CanvasLayer)
+scripts/fmv/
+  GameManager.gd           # Autoload singleton — scene data, relationships
+  MainMenu.gd              # Menu logic (New Game, Exit)
+  ScenePlayer.gd           # Video sequencing, fade transitions, scene flow
+  ChoiceOverlay.gd         # Choice button creation + relationship apply
+tools/
+  convert_video.py         # MP4 → OGV converter (uses Docker)
 ```
+
+## Autoloads
+- `GameManager` → `scripts/fmv/GameManager.gd`
+
+## FMV Scene System
+
+### scenes.json format
+```json
+{
+  "id": "scene_01",
+  "title": "ฉาก 1 — หน้าอาคาร",
+  "videos": ["res://data/scene_1/s1.1.ogv", "res://data/scene_1/s1.2.ogv"],
+  "loop_video": "res://data/scene_1/loop.ogv",
+  "duration": 5.0,
+  "choices": [
+    {
+      "id": "choice_class",
+      "icon": "",
+      "label": "ไปเรียนกับใบเตย",
+      "next": "scene_03",
+      "relationship": { "baitoey": 10 }
+    }
+  ],
+  "next": "scene_02"
+}
+```
+
+### Video playback flow
+```
+videos[0] → fade → videos[1] → ... → videos[N] → loop_video (loops) + show choices
+```
+- `videos` (array): played sequentially, fade transition between each
+- `loop_video` (string): loops after all videos finish, choices shown on top
+- Fade starts 0.3s before video ends for smooth transition
+- Video rendered via TextureRect with STRETCH_KEEP_ASPECT_COVERED (no black bars)
+- Old `"video"` field (single string) still supported for backward compat
+
+### Scene flow (no videos)
+- `duration` > 0 + choices → show choices after timer
+- `duration` > 0, no choices → auto-advance to `next`
+- `duration` = 0 + choices → show choices immediately
+
+### Special scene IDs
+- `scene_main_menu` → returns to MainMenu.tscn (not handled in ScenePlayer)
+
+## Relationship System
+
+### Characters
+| Key | Name |
+|-----|------|
+| `paeng` | แป้ง |
+| `baitoey` | ใบเตย |
+| `beam` | บีม |
+| `ploy` | พลอย |
+
+### How it works
+- Each character has a relationship score: 0–100 (starts at 0)
+- Choices in scenes.json can modify relationships via `"relationship"` field
+- Positive values increase, negative values decrease
+- Multiple characters per choice: `{ "baitoey": 5, "beam": -3 }`
+- Empty `{}` or omitted = no change
+- `GameManager.relationship_changed` signal fires on every change
+- New Game resets all relationships to 0
+
+## Video conversion
+Godot 4 only supports `.ogv` (Theora). Convert MP4 using Docker:
+```bash
+python3 tools/convert_video.py data/scene_X/video.mp4
+python3 tools/convert_video.py data/scene_X/*.mp4 --delete-original
+```
+Requires Docker (OrbStack) running. Uses `linuxserver/ffmpeg` image.
+
+## Git rules
+- `*.ogv`, `*.mp4` are gitignored — video files not tracked
+- `data/scenes.json` IS tracked (scene definitions, not video data)
 
 ## Conventions
 - Line endings: LF (enforced via `.gitattributes`)
