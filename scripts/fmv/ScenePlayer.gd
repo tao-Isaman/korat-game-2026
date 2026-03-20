@@ -17,6 +17,7 @@ var _fade_started_early: bool = false
 @onready var choice_overlay: CanvasLayer = $ChoiceOverlay
 @onready var fade_rect: ColorRect = $FadeRect
 @onready var auto_advance_timer: Timer = $AutoAdvanceTimer
+@onready var phone_ui: CanvasLayer = $PhoneUI
 
 
 func _ready() -> void:
@@ -54,6 +55,7 @@ func load_scene(scene_id: String) -> void:
 
 func _set_scene_content(data: Dictionary) -> void:
 	choice_overlay.hide_choices()
+	phone_ui.hide_phone_button()
 	title_label.text = data.get("title", "")
 
 	_clear_video()
@@ -86,6 +88,7 @@ func _start_scene_logic(data: Dictionary) -> void:
 		_play_loop_video()
 		if choices.size() > 0:
 			choice_overlay.show_choices(choices)
+			phone_ui.show_phone_button()
 	else:
 		# No videos — use duration timer
 		if choices.size() > 0 and duration > 0.0:
@@ -94,6 +97,7 @@ func _start_scene_logic(data: Dictionary) -> void:
 			auto_advance_timer.start()
 		elif choices.size() > 0:
 			choice_overlay.show_choices(choices)
+			phone_ui.show_phone_button()
 		elif duration > 0.0:
 			_pending_choices = []
 			auto_advance_timer.wait_time = duration
@@ -172,6 +176,7 @@ func _on_all_videos_finished() -> void:
 
 	if choices.size() > 0:
 		choice_overlay.show_choices(choices)
+		phone_ui.show_phone_button()
 	else:
 		var next_id: String = data.get("next", "")
 		if next_id != "":
@@ -241,6 +246,7 @@ func _clear_video() -> void:
 func _on_auto_advance_timeout() -> void:
 	if _pending_choices.size() > 0:
 		choice_overlay.show_choices(_pending_choices)
+		phone_ui.show_phone_button()
 		_pending_choices = []
 	else:
 		var data: Dictionary = GameManager.get_scene(GameManager.current_scene_id)

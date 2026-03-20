@@ -10,6 +10,12 @@ const CHARACTER_NAMES := {
 	"beam": "บีม",
 	"ploy": "พลอย"
 }
+const CHARACTER_BIOS := {
+	"paeng": "เพื่อนสมัยมัธยม เจอกันอีกครั้งที่วัด ดูลึกลับกว่าเดิม",
+	"baitoey": "เพื่อนสนิทตั้งแต่เด็ก ชอบชวนไปไหนมาไหน ร่าเริงสดใส",
+	"beam": "รุ่นพี่ที่คณะ ดูแลทุกคน ใจดีแต่พูดน้อย",
+	"ploy": "เพื่อนร่วมห้อง เงียบๆ แต่สังเกตทุกอย่าง"
+}
 
 var scenes_data: Dictionary = {}
 var current_scene_id: String = ""
@@ -17,6 +23,7 @@ var scene_player: Node = null
 
 # Relationship points per character (0-100)
 var relationships: Dictionary = {}
+var choice_history: Array = []
 
 signal relationship_changed(character: String, value: int)
 
@@ -51,6 +58,7 @@ func _load_scenes() -> void:
 func reset_relationships() -> void:
 	for c in CHARACTERS:
 		relationships[c] = 0
+	choice_history = []
 
 
 func get_relationship(character: String) -> int:
@@ -75,6 +83,14 @@ func apply_choice_relationships(choice: Dictionary) -> Array:
 		var amount: int = int(rel[character])
 		add_relationship(character, amount)
 		changes.append(amount)
+
+	# Track choice history
+	var scene_data: Dictionary = get_scene(current_scene_id)
+	choice_history.append({
+		"scene_title": scene_data.get("title", current_scene_id),
+		"choice_label": choice.get("label", ""),
+	})
+
 	return changes
 
 
