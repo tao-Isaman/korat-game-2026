@@ -18,11 +18,16 @@ func _ready() -> void:
 	auto_advance_timer.timeout.connect(_on_auto_advance_timeout)
 	choice_overlay.choice_selected.connect(_on_choice_selected)
 	fade_rect.color = Color(0, 0, 0, 1)
-	GameManager.go_to_scene("scene_01")
+	GameManager.go_to_scene(GameManager.FIRST_SCENE)
 
 
 func load_scene(scene_id: String) -> void:
 	if _is_transitioning:
+		return
+
+	# Return to main menu screen
+	if scene_id == "scene_main_menu":
+		get_tree().change_scene_to_file("res://scenes/fmv/Main.tscn")
 		return
 
 	var data: Dictionary = GameManager.get_scene(scene_id)
@@ -53,21 +58,35 @@ func _set_scene_content(data: Dictionary) -> void:
 	choice_overlay.hide_choices()
 	title_label.text = data.get("title", "")
 
-	# Future: handle video
+	# Clear previous video immediately
+	for child in video_container.get_children():
+		video_container.remove_child(child)
+		child.queue_free()
+
 	var video_path: String = data.get("video", "")
 	if video_path != "":
 		title_label.visible = false
-		# Future: create VideoStreamPlayer in video_container
-		# var stream = load(video_path)
-		# var player = VideoStreamPlayer.new()
-		# player.stream = stream
-		# player.set_anchors_preset(Control.PRESET_FULL_RECT)
-		# video_container.add_child(player)
-		# player.play()
+		var stream = load(video_path)
+		if stream:
+			var player := VideoStreamPlayer.new()
+			player.stream = stream
+			player.loop = true
+			video_container.add_child(player)
+			# Set full rect explicitly after adding to tree
+			player.anchor_left = 0.0
+			player.anchor_top = 0.0
+			player.anchor_right = 1.0
+			player.anchor_bottom = 1.0
+			player.offset_left = 0
+			player.offset_top = 0
+			player.offset_right = 0
+			player.offset_bottom = 0
+			player.play()
+		else:
+			push_warning("Failed to load video: " + video_path)
+			title_label.visible = true
 	else:
 		title_label.visible = true
-		for child in video_container.get_children():
-			child.queue_free()
 
 
 func _start_scene_logic(data: Dictionary) -> void:

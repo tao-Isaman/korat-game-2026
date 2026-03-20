@@ -1,7 +1,8 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://vvhoayoa3s23"]
 
-[ext_resource type="PackedScene" path="res://scenes/fmv/ScenePlayer.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/fmv/MainMenu.tscn" id="1"]
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node" unique_id=1664115729]
 
-[node name="ScenePlayer" parent="." instance=ExtResource("1")]
+[node name="MainMenu" parent="." unique_id=1672523922 instance=ExtResource("1")]
+layout_mode = 3
