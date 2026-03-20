@@ -4,6 +4,10 @@ const FADE_DURATION := 0.3
 
 var _is_transitioning: bool = false
 var _pending_choices: Array = []
+var _video_queue: Array = []
+var _video_index: int = 0
+var _loop_video_path: String = ""
+var _current_player: VideoStreamPlayer = null
 
 @onready var background: ColorRect = $Background
 @onready var title_label: Label = $TitleLabel
@@ -25,7 +29,6 @@ func load_scene(scene_id: String) -> void:
 	if _is_transitioning:
 		return
 
-	# Return to main menu screen
 	if scene_id == "scene_main_menu":
 		get_tree().change_scene_to_file("res://scenes/fmv/Main.tscn")
 		return
@@ -39,18 +42,11 @@ func load_scene(scene_id: String) -> void:
 	auto_advance_timer.stop()
 	_pending_choices = []
 
-	# Fade to black
 	await _fade_in()
-
-	# Update content while black
 	_set_scene_content(data)
-
-	# Fade out to reveal
 	await _fade_out()
 
 	_is_transitioning = false
-
-	# Start scene logic
 	_start_scene_logic(data)
 
 
@@ -58,33 +54,19 @@ func _set_scene_content(data: Dictionary) -> void:
 	choice_overlay.hide_choices()
 	title_label.text = data.get("title", "")
 
-	# Clear previous video immediately
-	for child in video_container.get_children():
-		video_container.remove_child(child)
-		child.queue_free()
+	_clear_video()
 
-	var video_path: String = data.get("video", "")
-	if video_path != "":
+	# Parse video fields
+	_video_queue = data.get("videos", [])
+	_loop_video_path = data.get("loop_video", "")
+	_video_index = 0
+
+	# Backward compat: old "video" field
+	if _video_queue.is_empty() and data.get("video", "") != "":
+		_video_queue = [data.get("video")]
+
+	if _video_queue.size() > 0 or _loop_video_path != "":
 		title_label.visible = false
-		var stream = load(video_path)
-		if stream:
-			var player := VideoStreamPlayer.new()
-			player.stream = stream
-			player.loop = true
-			video_container.add_child(player)
-			# Set full rect explicitly after adding to tree
-			player.anchor_left = 0.0
-			player.anchor_top = 0.0
-			player.anchor_right = 1.0
-			player.anchor_bottom = 1.0
-			player.offset_left = 0
-			player.offset_top = 0
-			player.offset_right = 0
-			player.offset_bottom = 0
-			player.play()
-		else:
-			push_warning("Failed to load video: " + video_path)
-			title_label.visible = true
 	else:
 		title_label.visible = true
 
@@ -93,20 +75,108 @@ func _start_scene_logic(data: Dictionary) -> void:
 	var choices: Array = data.get("choices", [])
 	var duration: float = data.get("duration", 0.0)
 
-	if choices.size() > 0 and duration > 0.0:
-		# Show choices after duration
+	if _video_queue.size() > 0:
+		# Play sequential videos, then loop + choices
 		_pending_choices = choices
-		auto_advance_timer.wait_time = duration
-		auto_advance_timer.start()
-	elif choices.size() > 0:
-		# Show choices immediately
-		choice_overlay.show_choices(choices)
-	elif duration > 0.0:
-		# Auto-advance after duration
-		_pending_choices = []
-		auto_advance_timer.wait_time = duration
-		auto_advance_timer.start()
+		_play_next_video()
+	elif _loop_video_path != "":
+		# Only loop video, show choices immediately
+		_play_loop_video()
+		if choices.size() > 0:
+			choice_overlay.show_choices(choices)
+	else:
+		# No videos — use duration timer
+		if choices.size() > 0 and duration > 0.0:
+			_pending_choices = choices
+			auto_advance_timer.wait_time = duration
+			auto_advance_timer.start()
+		elif choices.size() > 0:
+			choice_overlay.show_choices(choices)
+		elif duration > 0.0:
+			_pending_choices = []
+			auto_advance_timer.wait_time = duration
+			auto_advance_timer.start()
 
+
+# --- Video playback ---
+
+func _play_next_video() -> void:
+	if _video_index >= _video_queue.size():
+		_on_all_videos_finished()
+		return
+
+	var path: String = _video_queue[_video_index]
+	var stream = load(path)
+	if stream == null:
+		push_warning("Failed to load video: " + path)
+		_video_index += 1
+		_play_next_video()
+		return
+
+	_clear_video()
+	_current_player = _create_video_player(stream, false)
+	_current_player.finished.connect(_on_video_finished)
+	_current_player.play()
+
+
+func _on_video_finished() -> void:
+	_video_index += 1
+	_play_next_video()
+
+
+func _on_all_videos_finished() -> void:
+	# Play loop video if exists
+	if _loop_video_path != "":
+		_play_loop_video()
+
+	# Show choices or auto-advance
+	var data: Dictionary = GameManager.get_scene(GameManager.current_scene_id)
+	var choices: Array = _pending_choices if _pending_choices.size() > 0 else data.get("choices", [])
+	_pending_choices = []
+
+	if choices.size() > 0:
+		choice_overlay.show_choices(choices)
+	else:
+		var next_id: String = data.get("next", "")
+		if next_id != "":
+			GameManager.go_to_scene(next_id)
+
+
+func _play_loop_video() -> void:
+	_clear_video()
+	var stream = load(_loop_video_path)
+	if stream:
+		_current_player = _create_video_player(stream, true)
+		_current_player.play()
+
+
+func _create_video_player(stream: Resource, loop: bool) -> VideoStreamPlayer:
+	var player := VideoStreamPlayer.new()
+	player.stream = stream
+	player.loop = loop
+	video_container.add_child(player)
+	player.anchor_left = 0.0
+	player.anchor_top = 0.0
+	player.anchor_right = 1.0
+	player.anchor_bottom = 1.0
+	player.offset_left = 0
+	player.offset_top = 0
+	player.offset_right = 0
+	player.offset_bottom = 0
+	return player
+
+
+func _clear_video() -> void:
+	if _current_player and is_instance_valid(_current_player):
+		if _current_player.finished.is_connected(_on_video_finished):
+			_current_player.finished.disconnect(_on_video_finished)
+	for child in video_container.get_children():
+		video_container.remove_child(child)
+		child.queue_free()
+	_current_player = null
+
+
+# --- Timer & choices ---
 
 func _on_auto_advance_timeout() -> void:
 	if _pending_choices.size() > 0:

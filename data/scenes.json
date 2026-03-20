@@ -2,7 +2,8 @@
   {
 	"id": "scene_01",
 	"title": "ฉาก 1 — หน้าอาคาร",
-	"video": "res://data/scene_1/1.1.ogv",
+	"videos": ["res://data/scene_1/1.1.ogv"],
+	"loop_video": "",
 	"duration": 5.0,
 	"choices": [
 	  {
