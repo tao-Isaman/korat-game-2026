@@ -104,8 +104,39 @@ python3 tools/convert_video.py data/scene_X/*.mp4 --delete-original
 ```
 Requires Docker (OrbStack) running. Uses `linuxserver/ffmpeg` image.
 
+## Export
+
+### Web (WebGL)
+1. Open Godot editor: **Project → Export**
+2. Select **Web** preset (Thread Support: Disabled)
+3. Export to project root or `build/web/`
+4. Run with local server:
+```bash
+python3 -m http.server 8080 --bind 127.0.0.1
+# Open http://localhost:8080/korat-game.html
+```
+
+### CLI export (after preset created in editor)
+```bash
+# Web
+godot --headless --path . --export-release "Web" build/web/index.html
+
+# macOS
+godot --headless --path . --export-release "macOS" build/mac/korat-game.dmg
+
+# Windows
+godot --headless --path . --export-release "Windows Desktop" build/win/korat-game.exe
+```
+
+### Export notes
+- Web export bundles all videos into `.pck` (~600MB) — slow to load
+- Export templates must be installed first (Godot editor → Editor → Manage Export Templates)
+- Templates location on macOS: `~/Library/Application Support/Godot/export_templates/4.6.1.stable/`
+- Web build requires HTTP server with proper headers (SharedArrayBuffer needs COOP/COEP if threads enabled)
+
 ## Git rules
-- `*.ogv`, `*.mp4` are gitignored — video files not tracked
+- `*.ogv`, `*.mp4`, `*.pck`, `*.wasm` are gitignored — video/build files not tracked
+- Web build output files (`korat-game.html`, `.js`, `.png`) are gitignored
 - `data/scenes.json` IS tracked (scene definitions, not video data)
 
 ## Conventions

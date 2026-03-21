@@ -15,6 +15,14 @@
 *.app
 *.pck
 *.zip
+*.wasm
+*.audio.worklet.js
+*.audio.position.worklet.js
+korat-game.html
+korat-game.js
+korat-game.png
+korat-game.icon.png
+korat-game.apple-touch-icon.png
 
 # Godot mono (C#)
 .mono/
