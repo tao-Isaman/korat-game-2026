@@ -10,10 +10,10 @@ config_version=5
 
 [application]
 
-config/name="korat-game"
+config/name="อีกฝั่งของเธอ (The Other Side)"
 run/main_scene="uid://vvhoayoa3s23"
 config/features=PackedStringArray("4.6", "Mobile")
-config/icon="res://icon.svg"
+config/icon="res://assets/logo.png"
 
 [autoload]
 

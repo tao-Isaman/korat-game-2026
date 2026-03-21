@@ -1,7 +1,7 @@
 # CLAUDE.md — korat-game
 
 ## Project overview
-FMV interactive story game called "แฟนเก่า" built in Godot 4.6. Data-driven scene flow with video playback, branching choices, and character relationship system.
+FMV interactive story game called "อีกฝั่งของเธอ (The Other Side)" built in Godot 4.6. Data-driven scene flow with video playback, branching choices, and character relationship system.
 
 ## Tech stack
 - **Engine**: Godot 4.6.1

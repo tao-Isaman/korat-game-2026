@@ -1,4 +1,4 @@
-# แฟนเก่า — FMV Interactive Story Game
+# อีกฝั่งของเธอ (The Other Side)
 
 An interactive FMV (Full Motion Video) story game built with Godot 4.6.
 
@@ -76,6 +76,24 @@ tools/
 - Character relationship system (hidden from player)
 - In-game phone UI (relationship view + choice history)
 - Video cover-fill rendering (no black bars)
+- Key Item system (coming soon)
+- Unlockable choices (coming soon)
+
+## Game Mechanics
+
+### ระบบความสัมพันธ์ (Relationship System)
+ทุกตัวเลือกที่ผู้เล่นเลือกจะส่งผลต่อความสัมพันธ์กับตัวละครแต่ละตัวแบบซ่อนอยู่เบื้องหลัง ผู้เล่นจะเห็นแค่คะแนนที่เปลี่ยนแต่ไม่รู้ว่าเป็นของตัวละครไหน สามารถเช็คความสัมพันธ์ได้ผ่านโทรศัพท์ในเกม
+
+### ไอเทมสำคัญ (Key Item) — coming soon
+บางตัวเลือกในเกมจะทำให้ผู้เล่นได้รับไอเทมสำคัญ ไอเทมเหล่านี้จะส่งผลต่อเนื้อเรื่องในฉากถัดๆ ไป เช่น ได้รับกุญแจจะสามารถเปิดประตูลับได้ หรือได้รับจดหมายจะทำให้เนื้อเรื่องเปลี่ยนไป
+
+### ตัวเลือกที่ซ่อนอยู่ (Unlockable Choice) — coming soon
+บางฉากจะมีตัวเลือกที่ซ่อนอยู่ ตัวเลือกเหล่านี้จะปลดล็อคได้เมื่อ:
+- **ความสัมพันธ์** กับตัวละครบางตัวถึงระดับที่กำหนด
+- **มีไอเทมสำคัญ** บางชิ้นอยู่ในมือ
+- หรือ **ทั้งสองอย่าง** รวมกัน
+
+ตัวเลือกที่ปลดล็อคได้จะเปิดเส้นทางใหม่ในเนื้อเรื่องหรือนำไปสู่ตอนจบที่แตกต่างออกไป ทำให้เกมมีความ replay value สูง
 
 ## Tech Stack
 
