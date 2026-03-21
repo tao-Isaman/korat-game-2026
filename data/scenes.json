@@ -1,4 +1,5 @@
 [
+<<<<<<< Updated upstream
 	{
 		"id": "scene_01",
 		"title": "ฉาก 1 — หน้าอาคาร",
@@ -253,4 +254,251 @@
 			}
 		]
 	}
+=======
+  {
+	"id": "scene_01",
+	"title": "ฉาก 1 — หน้าอาคาร",
+	"videos": [
+	  "res://data/scene_1/s1.1.ogv",
+	  "res://data/scene_1/s1.2.ogv",
+      "res://data/scene_1/s1.3.ogv"
+	],
+	"loop_video": "res://data/scene_1/s1.4.ogv",
+	"duration": 5.0,
+	"choices": [
+	  {
+		"id": "choice_bathroom",
+		"icon": "",
+		"label": "ไปห้องน้ำก่อน",
+		"next": "scene_02",
+		"relationship": {}
+	  },
+	  {
+		"id": "choice_class",
+		"icon": "",
+		"label": "ไปเรียนกับใบเตย",
+		"next": "scene_03",
+		"relationship": {
+		  "baitoey": 10
+		}
+	  }
+	]
+  },
+  {
+	"id": "scene_02",
+	"title": "ฉาก 2 — ห้องน้ำ",
+	"videos": [
+	  "res://data/scene_2/2.ogv",
+	  "res://data/scene_2/toilet4.ogv",
+	  "res://data/scene_2/toilet5.ogv",
+      "res://data/scene_2/toiletlast.ogv"
+	],
+	"loop_video": "",
+	"duration": 5.0,
+	"choices": [],
+	"next": "scene_03"
+  },
+  {
+	"id": "scene_03",
+	"title": "ฉาก 3 — ห้องเรียน",
+	"videos": ["res://data/scene_3/classroom.ogv"],
+	"duration": 5.0,
+	"choices": [],
+	"next": "scene_04"
+  },
+  {
+	"id": "scene_04",
+	"title": "ฉาก 4 — หน้าห้องเรียน",
+	"videos": ["res://data/scene_4/s4.ogv", "res://data/scene_4/s4-1.ogv"],
+	"loop_video": "res://data/scene_4/loop-scene-s4.ogv",
+	"duration": 5.0,
+	"choices": [
+	  {
+		"id": "choice_eat",
+		"icon": "",
+		"label": "ไปกินข้าว",
+		"next": "scene_05",
+		"relationship": {
+		  "baitoey": 5
+		}
+	  },
+	  {
+		"id": "choice_skip",
+		"icon": "",
+		"label": "ไม่ไป",
+		"next": "scene_end_placeholder",
+		"relationship": {
+		  "baitoey": -5
+		}
+	  }
+	]
+  },
+  {
+	"id": "scene_05",
+	"title": "ฉาก 5 — โรงอาหาร",
+	"videos": [
+	  "res://data/scene_5/s5.ogv",
+	  "res://data/scene_5/s5-1.ogv",
+	  "res://data/scene_5/s5-2.ogv",
+      "res://data/scene_5/s5-3.ogv"
+	],
+	"duration": 5.0,
+	"choices": [],
+	"next": "scene_06"
+  },
+  {
+	"id": "scene_06",
+	"title": "ฉาก 6 — โรงอาหาร บรรยากาศเปลี่ยน",
+	"videos": [
+	  "res://data/scene_6/s6-1.ogv",
+	  "res://data/scene_6/s6-2.ogv",
+      "res://data/scene_6/s6-3.ogv"
+	],
+	"loop_video": "res://data/scene_6/s6-loop.ogv",
+	"duration": 5.0,
+	"choices": [
+	  {
+		"id": "choice_merit_done",
+		"icon": "",
+		"label": "พึ่งไปทำมา",
+		"next": "scene_end_placeholder",
+		"relationship": {
+		  "paeng": 5
+		}
+	  },
+	  {
+		"id": "choice_merit_go",
+		"icon": "",
+		"label": "ไม่ได้ไปเลย",
+		"next": "scene_07",
+		"relationship": {
+		  "paeng": 10
+		}
+	  }
+	]
+  },
+  {
+	"id": "scene_07",
+	"title": "ฉาก 7 — วัด",
+	"videos": ["res://data/scene_7/pre-s7.ogv"],
+	"duration": 5.0,
+	"choices": [],
+	"next": "scene_08"
+  },
+  {
+	"id": "scene_08",
+	"title": "ฉาก 8 — ลานวัด",
+	"videos": [
+	  "res://data/scene_7/s7.ogv",
+	  "res://data/scene_7/pre-s7-2.ogv",
+      "res://data/scene_7/s7-1.ogv"
+	],
+	"loop_video": "res://data/scene_8/s8-loop.ogv",
+	"duration": 5.0,
+	"choices": [
+	  {
+		"id": "choice_go_home",
+		"icon": "",
+		"label": "กลับพร้อมกัน",
+		"next": "scene_end_placeholder",
+		"relationship": {
+		  "baitoey": 10
+		}
+	  },
+	  {
+		"id": "choice_stay",
+		"icon": "",
+		"label": "อยู่ต่อ",
+		"next": "scene_09",
+		"relationship": {
+		  "paeng": 10
+		}
+	  }
+	]
+  },
+  {
+	"id": "scene_09",
+	"title": "ฉาก 9 — ป่าหลังวัด",
+	"videos": ["res://data/scene_9/s9.ogv"],
+	"duration": 5.0,
+	"choices": [],
+	"next": "scene_10"
+  },
+  {
+	"id": "scene_10",
+	"title": "ฉาก 10 — แป้งปรากฏ",
+	"videos": ["res://data/scene_10/p_walk.ogv"],
+	"duration": 5.0,
+	"choices": [],
+	"next": "scene_11"
+  },
+  {
+	"id": "scene_11",
+	"title": "ฉาก 11 — กลับบ้านด้วยกันไหม",
+	"videos": [
+	  "res://data/scene_11/pang_talk_1.ogv",
+      "res://data/scene_11/pang_ask.ogv"
+	],
+	"loop_video": "res://data/scene_11/pang_loop.ogv",
+	"duration": 5.0,
+	"choices": [
+	  {
+		"id": "choice_stay_alive",
+		"icon": "",
+		"label": "ไม่กลับ",
+		"next": "scene_tbc",
+		"relationship": {
+		  "paeng": -10
+		}
+	  },
+	  {
+		"id": "choice_bad_end",
+		"icon": "",
+		"label": "กลับ",
+		"next": "scene_bad_end",
+		"relationship": {
+		  "paeng": 15
+		}
+	  }
+	]
+  },
+  {
+	"id": "scene_end_placeholder",
+	"title": "TO BE CONTINUED",
+	"video": "",
+	"duration": 3.0,
+	"choices": [],
+	"next": "scene_main_menu"
+  },
+  {
+	"id": "scene_tbc",
+	"title": "TO BE CONTINUED",
+	"video": "",
+	"duration": 3.0,
+	"choices": [],
+	"next": "scene_main_menu"
+  },
+  {
+	"id": "scene_bad_end",
+	"title": "BAD END",
+	"video": "res://data/scene_11/jump.ogv",
+	"duration": 3.0,
+	"choices": [],
+	"next": "scene_main_menu"
+  },
+  {
+	"id": "scene_main_menu",
+	"title": "MAIN MENU",
+	"video": "",
+	"duration": 0.0,
+	"choices": [
+	  {
+		"id": "choice_restart",
+		"icon": "",
+		"label": "เล่นใหม่",
+		"next": "scene_01"
+	  }
+	]
+  }
+>>>>>>> Stashed changes
 ]
