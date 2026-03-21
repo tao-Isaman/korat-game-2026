@@ -237,7 +237,7 @@
 	{
 		"id": "scene_bad_end",
 		"title": "BAD END",
-		"video": "",
+		"video": "res://data/scene_11/jump.ogv",
 		"duration": 3.0,
 		"choices": [],
 		"next": "scene_main_menu"
