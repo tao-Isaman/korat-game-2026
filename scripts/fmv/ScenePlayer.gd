@@ -10,6 +10,8 @@ var _video_index: int = 0
 var _loop_video_path: String = ""
 var _current_player: VideoStreamPlayer = null
 var _fade_started_early: bool = false
+var _cheat_buffer: String = ""
+var _cheat_timer: float = 0.0
 
 @onready var background: ColorRect = $Background
 @onready var title_label: Label = $TitleLabel
@@ -218,7 +220,7 @@ func _create_video_player(stream: Resource, loop: bool) -> VideoStreamPlayer:
 	return player
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	# Update TextureRect with video texture each frame
 	if _current_player and is_instance_valid(_current_player) and _current_player.is_playing():
 		var tex = _current_player.get_video_texture()
@@ -227,6 +229,46 @@ func _process(_delta: float) -> void:
 
 	# Start fade before video ends for smooth transition
 	_check_early_fade()
+
+	# Cheat code — execute after 0.5s of no new input
+	if _cheat_buffer.length() > 1:
+		_cheat_timer += delta
+		if _cheat_timer > 0.5:
+			_execute_cheat()
+
+
+func _execute_cheat() -> void:
+	var num: String = _cheat_buffer.substr(1)
+	_cheat_buffer = ""
+	var scene_id: String = "scene_%s" % num.pad_zeros(2)
+	if GameManager.get_scene(scene_id).size() > 0:
+		_is_transitioning = false
+		GameManager.go_to_scene(scene_id)
+
+
+func _unhandled_key_input(event: InputEvent) -> void:
+	if not event is InputEventKey or not event.pressed or event.echo:
+		return
+
+	var key_event: InputEventKey = event as InputEventKey
+	var c: String = char(key_event.unicode)
+
+	if c == "":
+		return
+
+	# Reset timer on each keystroke
+	_cheat_timer = 0.0
+
+	if _cheat_buffer == "" and c == "s":
+		_cheat_buffer = "s"
+		return
+
+	if _cheat_buffer.begins_with("s") and c.is_valid_int():
+		_cheat_buffer += c
+		return
+
+	# Invalid key — reset
+	_cheat_buffer = ""
 
 
 func _clear_video() -> void:
