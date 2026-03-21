@@ -12,6 +12,7 @@ var _current_player: VideoStreamPlayer = null
 var _fade_started_early: bool = false
 var _cheat_buffer: String = ""
 var _cheat_timer: float = 0.0
+var _wait_sound_player: AudioStreamPlayer = null
 
 @onready var background: ColorRect = $Background
 @onready var title_label: Label = $TitleLabel
@@ -46,6 +47,7 @@ func load_scene(scene_id: String) -> void:
 	_is_transitioning = true
 	auto_advance_timer.stop()
 	_pending_choices = []
+	_stop_wait_sound()
 
 	await _fade_in()
 	_set_scene_content(data)
@@ -179,6 +181,7 @@ func _on_all_videos_finished() -> void:
 	if choices.size() > 0:
 		choice_overlay.show_choices(choices)
 		phone_ui.show_phone_button()
+		_play_wait_sound()
 	else:
 		var next_id: String = data.get("next", "")
 		if next_id != "":
@@ -298,7 +301,34 @@ func _on_auto_advance_timeout() -> void:
 
 
 func _on_choice_selected(next_scene_id: String) -> void:
+	_stop_wait_sound()
 	GameManager.go_to_scene(next_scene_id)
+
+
+func _play_wait_sound() -> void:
+	_stop_wait_sound()
+	var stream: AudioStream = load("res://assets/sound/wait_sound.mp3")
+	if stream == null:
+		return
+	_wait_sound_player = AudioStreamPlayer.new()
+	_wait_sound_player.stream = stream
+	_wait_sound_player.bus = "Master"
+	_wait_sound_player.autoplay = true
+	add_child(_wait_sound_player)
+	# Loop: restart when finished
+	_wait_sound_player.finished.connect(_on_wait_sound_finished)
+
+
+func _on_wait_sound_finished() -> void:
+	if _wait_sound_player and is_instance_valid(_wait_sound_player):
+		_wait_sound_player.play()
+
+
+func _stop_wait_sound() -> void:
+	if _wait_sound_player and is_instance_valid(_wait_sound_player):
+		_wait_sound_player.stop()
+		_wait_sound_player.queue_free()
+		_wait_sound_player = null
 
 
 func _fade_in() -> void:
