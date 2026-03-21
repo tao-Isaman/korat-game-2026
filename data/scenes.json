@@ -170,7 +170,11 @@
   {
 	"id": "scene_11",
 	"title": "ฉาก 11 — กลับบ้านด้วยกันไหม",
-	"videos": ["res://data/scene_11/pang_talk_1.ogv"],
+	"videos": [
+	  "res://data/scene_11/pang_talk_1.ogv",
+      "res://data/scene_11/pang_ask.ogv"
+	],
+	"loop_video": "res://data/scene_11/pang_loop.ogv",
 	"duration": 5.0,
 	"choices": [
 	  {
@@ -191,7 +195,7 @@
   },
   {
 	"id": "scene_end_placeholder",
-	"title": "ฉากนี้ยังไม่ได้เขียน",
+	"title": "TO BE CONTINUED",
 	"video": "",
 	"duration": 3.0,
 	"choices": [],
