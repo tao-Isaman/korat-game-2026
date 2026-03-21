@@ -120,7 +120,7 @@
 				"label": "ไม่ได้ไปเลย",
 				"next": "scene_07",
 				"relationship": {
-          "paeng": 10
+					"paeng": 10
 				}
 			}
 		]
@@ -152,7 +152,7 @@
 				"label": "กลับพร้อมกัน",
 				"next": "scene_end_placeholder",
 				"relationship": {
-          "baitoey": 10
+					"baitoey": 10
 				}
 			},
 			{
