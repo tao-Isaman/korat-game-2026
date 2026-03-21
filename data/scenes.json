@@ -119,10 +119,7 @@
   {
     "id": "scene_07",
     "title": "ฉาก 7 — วัด",
-    "videos": [
-      "res://data/scene_7/pre-s7.ogv",
-      "res://data/scene_7/pre-s7-2.ogv"
-    ],
+    "videos": ["res://data/scene_7/pre-s7.ogv"],
     "duration": 5.0,
     "choices": [],
     "next": "scene_08"
@@ -130,7 +127,11 @@
   {
     "id": "scene_08",
     "title": "ฉาก 8 — ลานวัด",
-    "videos": ["res://data/scene_7/s7.ogv", "res://data/scene_7/s7-1.ogv"],
+    "videos": [
+      "res://data/scene_7/s7.ogv",
+      "res://data/scene_7/pre-s7-2.ogv",
+      "res://data/scene_7/s7-1.ogv"
+    ],
     "loop_video": "res://data/scene_8/s8-loop.ogv",
     "duration": 5.0,
     "choices": [
@@ -153,7 +154,7 @@
   {
     "id": "scene_09",
     "title": "ฉาก 9 — ป่าหลังวัด",
-    "video": "",
+    "videos": ["res://data/scene_9/s9.ogv"],
     "duration": 5.0,
     "choices": [],
     "next": "scene_10"
@@ -161,7 +162,7 @@
   {
     "id": "scene_10",
     "title": "ฉาก 10 — แป้งปรากฏ",
-    "video": "",
+    "videos": ["res://data/scene_10/p_walk.ogv"],
     "duration": 5.0,
     "choices": [],
     "next": "scene_11"
@@ -169,7 +170,7 @@
   {
     "id": "scene_11",
     "title": "ฉาก 11 — กลับบ้านด้วยกันไหม",
-    "video": "",
+    "videos": ["res://data/scene_11/pang_talk_1.ogv"],
     "duration": 5.0,
     "choices": [
       {
