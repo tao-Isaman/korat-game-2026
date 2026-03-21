@@ -5,9 +5,12 @@ signal choice_selected(next_scene_id: String)
 @onready var panel: ColorRect = $Panel
 @onready var button_container: HBoxContainer = $Panel/HBoxContainer
 
+var click_sound: AudioStream
+
 
 func _ready() -> void:
 	panel.visible = false
+	click_sound = load("res://assets/sound/main_game_click.mp3")
 
 
 func show_choices(choices: Array) -> void:
@@ -42,10 +45,22 @@ func _clear_buttons() -> void:
 
 
 func _on_button_pressed(choice: Dictionary) -> void:
+	_play_click_sound()
 	var changes: Array = GameManager.apply_choice_relationships(choice)
 	hide_choices()
 	_show_point_notifications(changes)
 	choice_selected.emit(choice.get("next", ""))
+
+
+func _play_click_sound() -> void:
+	if click_sound == null:
+		return
+	var player := AudioStreamPlayer.new()
+	player.stream = click_sound
+	player.bus = "Master"
+	add_child(player)
+	player.play()
+	player.finished.connect(player.queue_free)
 
 
 func _show_point_notifications(changes: Array) -> void:
