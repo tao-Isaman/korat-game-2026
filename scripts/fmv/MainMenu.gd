@@ -1,10 +1,10 @@
 extends Control
 
-@onready var btn_new_game: Button = $HBox/MenuPanel/MarginContainer/VBox/BtnNewGame
-@onready var btn_load: Button = $HBox/MenuPanel/MarginContainer/VBox/BtnLoad
-@onready var btn_settings: Button = $HBox/MenuPanel/MarginContainer/VBox/BtnSettings
-@onready var btn_about: Button = $HBox/MenuPanel/MarginContainer/VBox/BtnAbout
-@onready var btn_exit: Button = $HBox/MenuPanel/MarginContainer/VBox/BtnExit
+@onready var btn_new_game: Button = $MenuPanel/VBox/BtnNewGame
+@onready var btn_load: Button = $MenuPanel/VBox/BtnLoad
+@onready var btn_settings: Button = $MenuPanel/VBox/BtnSettings
+@onready var btn_about: Button = $MenuPanel/VBox/BtnAbout
+@onready var btn_exit: Button = $MenuPanel/VBox/BtnExit
 
 
 func _ready() -> void:

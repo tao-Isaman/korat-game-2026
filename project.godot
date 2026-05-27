@@ -10,18 +10,14 @@ config_version=5
 
 [application]
 
-config/name="อีกฝั่งของเธอ (The Other Side)"
+config/name="heartinherflow"
 run/main_scene="uid://vvhoayoa3s23"
 config/features=PackedStringArray("4.6", "Mobile")
-config/icon="res://assets/logo.png"
+config/icon="uid://dpr2v6o4en4jt"
 
 [autoload]
 
 GameManager="*res://scripts/fmv/GameManager.gd"
-
-[gui]
-
-theme/custom="res://assets/theme/default_theme.tres"
 
 [display]
 
@@ -29,6 +25,10 @@ window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+
+[gui]
+
+theme/custom="res://assets/theme/default_theme.tres"
 
 [physics]
 

@@ -339,3 +339,32 @@ godot --path . -s res://scripts/main.gd --check-only
 - Do not edit `.godot/` contents directly — these are engine-managed caches
 - The `project.godot` file can be edited but prefer using the Godot editor UI
 - Jolt Physics replaces the default Godot physics engine for 3D
+
+## Activity Log
+
+### [2026-05-08] Add Theme Song to Main Menu
+- Added an `AudioStreamPlayer` to `MainMenu.tscn` to play `res://assets/sound/themesong.mp3` automatically (`autoplay = true`).
+- Changed `loop=false` to `loop=true` in `assets/sound/themesong.mp3.import` to ensure the menu theme loops continuously.
+
+### [2026-05-08] Update Main Menu Background and Layout
+- Changed background of `MainMenu.tscn` to use `res://assets/Screenshot 2026-05-07 203440.png` via `TextureRect`.
+- Removed `PanelContainer` background from `MenuPanel` by changing it to `Control`.
+- Swapped the order of `MenuPanel` and `LogoPanel` in the `HBoxContainer` to move the menu to the left (empty space).
+- Removed the old `logo.png` (`LogoPanel` contents) since the new background image already has the game title.
+
+### [2026-05-08] Add Scene 2 Entrance Video
+- Added `res://assets/video/entrance_sut.ogv` to `scene_02`'s video list so it plays right before the choices appear.
+
+### [2026-05-08] Add Food Scene
+- Added `res://assets/video/foodmacro.ogv` to `scene_03_toey`'s video list so it plays after the restaurant establishing shot.
+
+### [2026-05-27] Update UI Assets (Logo, Background, Buttons)
+- Updated `MainMenu.tscn` to use `res://assets/Screenshot 2026-05-07 203440.png` as the main UI background again.
+- Set `res://assets/hear in her flow no bg.png` as the background of the `MenuPanel` itself, and removed the "MENU" text.
+- Re-added the logo panel on the right side of the main menu, using `res://assets/heart in her flow.png` as the logo.
+- Updated `default_theme.tres` to use `res://assets/button.png` as the default background for all button states with `texture_margin` adjusted so it scales correctly with the text size.
+### [2026-05-28] Clean up MainMenu layout
+- Removed LogoPanel + Logo entirely.
+- Removed `hear in her flow no bg.png` from the menu panel (was causing a visual mess).
+- Rebuilt MenuPanel as a small semi-transparent dark box anchored left-center using `StyleBoxFlat`, with fixed-width buttons (200px) stacked cleanly.
+
