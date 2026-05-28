@@ -3,13 +3,11 @@
 		"id": "scene_01",
 		"title": "Scene 1: ก่อนเริ่มเรียน (ห้อง 1500)",
 		"videos": [
-			"res://data/scene_1/entrance.ogv",
-			"res://data/scene_1/s1.1.ogv",
-			"res://data/scene_1/s1.2.ogv",
-			"res://data/scene_1/s1.3.ogv",
-			"res://data/scene_3/classroom_footage.ogv"
+			"res://assets/video/scene 1/entrance_sut.ogv",
+			"res://assets/video/scene 1/walkingtocamera.ogv",
+			"res://assets/video/scene 1/classroom.ogv"
 		],
-		"loop_video": "res://data/scene_1/s1_loop.ogv",
+		"loop_video": "",
 		"duration": 5.0,
 		"choices": [],
 		"next": "scene_02"

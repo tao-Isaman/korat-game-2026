@@ -5,6 +5,7 @@ extends Control
 @onready var btn_settings: Button = $MenuPanel/VBox/BtnSettings
 @onready var btn_about: Button = $MenuPanel/VBox/BtnAbout
 @onready var btn_exit: Button = $MenuPanel/VBox/BtnExit
+@onready var logo: TextureRect = $Logo
 
 
 func _ready() -> void:
@@ -18,6 +19,13 @@ func _ready() -> void:
 	btn_load.disabled = true
 	btn_settings.disabled = true
 	btn_about.disabled = true
+
+	# Slowly fade in logo
+	if logo:
+		logo.modulate.a = 0.0
+		var tween = create_tween()
+		tween.tween_property(logo, "modulate:a", 1.0, 2.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
 
 
 func _on_new_game() -> void:

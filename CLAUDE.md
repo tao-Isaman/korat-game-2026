@@ -368,3 +368,8 @@ godot --path . -s res://scripts/main.gd --check-only
 - Removed `hear in her flow no bg.png` from the menu panel (was causing a visual mess).
 - Rebuilt MenuPanel as a small semi-transparent dark box anchored left-center using `StyleBoxFlat`, with fixed-width buttons (200px) stacked cleanly.
 
+### [2026-05-28] Add Logo Fade-in & Update Scene 1 Video Sequence
+- Added a 2.0-second smooth fade-in animation using a Godot Tween to transition the Main Menu game logo (`$Logo`) from fully transparent to opaque on load.
+- Configured `data/scenes.json`'s first scene (`scene_01`) to play SUT's new entrance video sequence: `entrance_sut.ogv` -> `walkingtocamera.ogv` -> `classroom.ogv` sequentially before auto-advancing to `scene_02`.
+
+
