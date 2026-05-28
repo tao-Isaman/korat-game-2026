@@ -4,6 +4,7 @@
 [ext_resource type="AudioStream" uid="uid://b7nnesqmh2dd4" path="res://assets/sound/themesong.mp3" id="3_audio"]
 [ext_resource type="Texture2D" uid="uid://ctb82ntg7b3au" path="res://assets/bgsut.png" id="4_bg"]
 [ext_resource type="Texture2D" uid="uid://nj4ia3ihdfgx" path="res://assets/hear in her flow no bg.png" id="5_logo"]
+[ext_resource type="Theme" uid="uid://dj4la3ihdfgx" path="res://assets/theme/main_menu_theme.tres" id="6_theme"]
 
 [node name="MainMenu" type="Control" unique_id=1521128592]
 layout_mode = 3
@@ -12,6 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("6_theme")
 script = ExtResource("1")
 
 [node name="ThemeSongPlayer" type="AudioStreamPlayer" parent="." unique_id=883667015]

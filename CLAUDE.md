@@ -372,4 +372,9 @@ godot --path . -s res://scripts/main.gd --check-only
 - Added a 2.0-second smooth fade-in animation using a Godot Tween to transition the Main Menu game logo (`$Logo`) from fully transparent to opaque on load.
 - Configured `data/scenes.json`'s first scene (`scene_01`) to play SUT's new entrance video sequence: `entrance_sut.ogv` -> `walkingtocamera.ogv` -> `classroom.ogv` sequentially before auto-advancing to `scene_02`.
 
+### [2026-05-28] Isolate Custom Button Texture to Main Menu
+- Reverted global `assets/theme/default_theme.tres` to its original clean state to restore standard Godot button look (no texture, standard text colors) for all in-game choice overlay buttons and phone buttons.
+- Created `assets/theme/main_menu_theme.tres` theme file that exclusively includes the custom `button.png` stylebox texture and black text colors.
+- Assigned `main_menu_theme.tres` as the custom theme for the root node of `MainMenu.tscn` to isolate premium custom buttons exclusively to the Main Menu.
+
 
