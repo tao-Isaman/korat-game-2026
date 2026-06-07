@@ -45,4 +45,12 @@
 - Modified `scripts/fmv/ScenePlayer.gd` to display the scene title in white text on a black screen for a default duration of 5 seconds (or custom duration if specified) when a scene does not contain any videos.
 - Increased the font size of the `TitleLabel` in `scenes/fmv/ScenePlayer.tscn` from 32 to 48 for improved readability during the black screen.
 
+### [2026-06-08] Configure Video Lists for Scenes 1, 2, and 3
+- Set the video paths in `data/scenes.json`:
+  - `scene_01`: `entrance.ogv`
+  - `scene_02`: `toeytalkkit.ogv` (no loop video to display choices on a black screen)
+  - `scene_03_toey`: `งานบุญ_1.ogv` -> `งานทอดกฐิน.ogv` -> `แห่เทียน.ogv` sequentially
+- Modified `_on_all_videos_finished()` in `scripts/fmv/ScenePlayer.gd` to clear the video container and display a black background when all sequential videos finish and no loop video is configured.
+
+
 

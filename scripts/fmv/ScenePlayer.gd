@@ -168,9 +168,11 @@ func _check_early_fade() -> void:
 
 
 func _on_all_videos_finished() -> void:
-	# Play loop video if exists
+	# Play loop video if exists, otherwise clear video container to go black
 	if _loop_video_path != "":
 		_play_loop_video()
+	else:
+		_clear_video()
 
 	# Show choices or auto-advance
 	var data: Dictionary = GameManager.get_scene(GameManager.current_scene_id)

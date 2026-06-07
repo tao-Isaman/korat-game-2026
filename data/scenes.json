@@ -3,17 +3,20 @@
 		"id": "scene_01",
 		"title": "Scene 1: ในห้องแลป",
 		"videos": [
+			"res://data/video/scene 1/entrance.ogv"
 		],
 		"loop_video": "",
-		"duration": 5.0,
+		"duration": 0.0,
 		"next": "scene_02"
 	},
 	{
 		"id": "scene_02",
 		"title": "Scene 2: หน้าห้องแลป",
 		"videos": [
+			"res://data/video/scene 2/toeytalkkit.ogv"
 		],
-		"duration": 5.0,
+		"loop_video": "",
+		"duration": 0.0,
 		"choices": [
 			{
 				"id": "choice_go_toeys",
@@ -39,9 +42,12 @@
 		"id": "scene_03_toey",
 		"title": "Scene 3: ร้านข้าวกับเตย",
 		"videos": [
+			"res://data/video/scene 3/งานบุญ_1.ogv",
+			"res://data/video/scene 3/งานทอดกฐิน.ogv",
+			"res://data/video/scene 3/แห่เทียน.ogv"
 		],
 		"loop_video": "",
-		"duration": 5.0,
+		"duration": 0.0,
 		"choices": [
 			{
 				"id": "choice_toey_go_event",
