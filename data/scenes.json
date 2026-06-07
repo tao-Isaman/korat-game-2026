@@ -6,6 +6,14 @@
 		],
 		"loop_video": "",
 		"duration": 5.0,
+		"next": "scene_02"
+	},
+	{
+		"id": "scene_02",
+		"title": "Scene 2: หน้าห้องแลป",
+		"videos": [
+		],
+		"duration": 5.0,
 		"choices": [
 			{
 				"id": "choice_go_toeys",
@@ -26,17 +34,6 @@
 				}
 			}
 		]
-		,
-		"next": "scene_02"
-	},
-	{
-		"id": "scene_02",
-		"title": "Scene 2: หน้าห้องแลป",
-		"videos": [
-		],
-		"duration": 5.0,
-		"choices": [],
-		"next": "scene_03_toey"
 	},
 	{
 		"id": "scene_03_toey",
@@ -124,7 +121,7 @@
 	},
 	{
 		"id": "scene_end_sut36",
-		"title": "Happy End: บรรยากาศงานฉลอง 36 ปี มทส.",
+		"title": "Happy End: ลานย่าโม",
 		"videos": [
 		],
 		"duration": 5.0,
