@@ -377,4 +377,11 @@ godot --path . -s res://scripts/main.gd --check-only
 - Created `assets/theme/main_menu_theme.tres` theme file that exclusively includes the custom `button.png` stylebox texture and black text colors.
 - Assigned `main_menu_theme.tres` as the custom theme for the root node of `MainMenu.tscn` to isolate premium custom buttons exclusively to the Main Menu.
 
+### [2026-06-07] Redesign Phone UI as a realistic smartphone
+- Rewrote `scripts/fmv/PhoneUI.gd` to render a real phone instead of a plain centered panel: phone body with bezel/rounded corners/drop shadow, a dynamic-island pill, a status bar (live clock + custom-drawn signal/wifi/battery icons), a bottom tab bar with custom-drawn people/clock icons, and a home indicator. Dark "app" theme with a pink accent; opens/closes with a scale+fade Tween.
+- Relationship tab is now a contacts-style list: per-character colored avatar (Thai initial), bio, a heart icon + score, and a rounded closeness bar tinted per character (`paeng` dark pink, `baitoey` orange, `beam` pastel pink, `ploy` violet). Avatar initials use dark text on light (pastel) avatars and white on dark ones for contrast.
+- History tab is a feed of cards with a left accent stripe, gray scene title, and the chosen line.
+- Sets the Kanit font on the phone's root so Thai text renders correctly. Public API (`show_phone_button`/`hide_phone_button`) is unchanged, so `ScenePlayer.gd` needs no edits.
+- Added a dev-only preview harness `tools/phone_preview.tscn` + `tools/phone_preview.gd` (seeds sample relationship/history data and auto-opens the phone) to view the UI without gameplay videos. Run: `godot --path . --scene res://tools/phone_preview.tscn`.
+
 
