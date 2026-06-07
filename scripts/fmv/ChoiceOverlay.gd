@@ -5,12 +5,12 @@ signal choice_selected(next_scene_id: String)
 @onready var panel: ColorRect = $Panel
 @onready var button_container: HBoxContainer = $Panel/HBoxContainer
 
-var click_sound: AudioStream
+var _choice_theme: Theme
 
 
 func _ready() -> void:
 	panel.visible = false
-	click_sound = load("res://assets/sound/main_game_click.mp3")
+	_choice_theme = load("res://assets/theme/choice_theme.tres")
 
 
 func show_choices(choices: Array) -> void:
@@ -24,11 +24,24 @@ func show_choices(choices: Array) -> void:
 			btn.text = "%s %s" % [icon, label]
 		else:
 			btn.text = icon
-		btn.custom_minimum_size = Vector2(250, 80)
-		btn.add_theme_font_size_override("font_size", 32)
+		btn.custom_minimum_size = Vector2(0, 58)
+		btn.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		btn.add_theme_font_size_override("font_size", 36)
+
+		# Apply pill theme
+		if _choice_theme:
+			btn.theme = _choice_theme
+
+		# Bounce animation on mouse enter
+		btn.mouse_entered.connect(_on_button_hover.bind(btn))
+		btn.mouse_exited.connect(_on_button_unhover.bind(btn))
 
 		btn.pressed.connect(_on_button_pressed.bind(choice))
 		button_container.add_child(btn)
+		
+		# Set pivot to center dynamically when layout updates the size
+		btn.pivot_offset = btn.size / 2.0
+		btn.resized.connect(func(): btn.pivot_offset = btn.size / 2.0)
 
 	panel.visible = true
 
@@ -44,23 +57,27 @@ func _clear_buttons() -> void:
 		child.queue_free()
 
 
+func _on_button_hover(btn: Button) -> void:
+	# Bounce (jiggle) scale animation on hover
+	var tween := btn.create_tween()
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_ELASTIC)
+	tween.tween_property(btn, "scale", Vector2(1.08, 1.08), 0.25)
+
+
+func _on_button_unhover(btn: Button) -> void:
+	var tween := btn.create_tween()
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_SPRING)
+	tween.tween_property(btn, "scale", Vector2(1.0, 1.0), 0.2)
+
+
 func _on_button_pressed(choice: Dictionary) -> void:
-	_play_click_sound()
+	GameManager.play_click_sound()
 	var changes: Array = GameManager.apply_choice_relationships(choice)
 	hide_choices()
 	_show_point_notifications(changes)
 	choice_selected.emit(choice.get("next", ""))
-
-
-func _play_click_sound() -> void:
-	if click_sound == null:
-		return
-	var player := AudioStreamPlayer.new()
-	player.stream = click_sound
-	player.bus = "Master"
-	add_child(player)
-	player.play()
-	player.finished.connect(player.queue_free)
 
 
 func _show_point_notifications(changes: Array) -> void:

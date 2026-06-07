@@ -11,10 +11,10 @@ const CHARACTER_NAMES := {
 	"ploy": "พลอย"
 }
 const CHARACTER_BIOS := {
-	"paeng": "แฟนของกิต วิญญาณ ปากร้ายใจดี พูดตรง ไม่กลัวใคร มาเพราะกิตยังปล่อยไม่ได้",
-	"baitoey": "เพื่อนสนิทของกิตและแป้ง ห้าวๆ พูดตรง แอบชอบกิตมานาน ดูแลโดยไม่บอกว่าดูแล",
-	"beam": "รุ่นน้องนิเทศ ปี 2 สดใส พลังงานสูง ชอบถ่ายรูป จำกิตได้ตั้งแต่รับน้อง",
-	"ploy": "ทันตะ ปี 3 เงียบ สังเกตมากกว่าพูด สนใจเรื่องจิตใจและความตาย"
+	"paeng": "สาวอีสานจาก ขอนแก่น ตัวแทนของ \"อีสาน\"",
+	"baitoey": "สาวอีสานจาก โคราช ตัวแทนของ \"อีสาน\"",
+	"beam": "สาวอีสานจาก บุรีรัมย์ ตัวแทนของ \"อีสาน\"",
+	"ploy": "สาวอีสานจาก กาฬสินธุ์ ตัวแทนของ \"อีสาน\""
 }
 
 var scenes_data: Dictionary = {}
@@ -25,12 +25,26 @@ var scene_player: Node = null
 var relationships: Dictionary = {}
 var choice_history: Array = []
 
+var click_sound: AudioStream
+
 signal relationship_changed(character: String, value: int)
 
 
 func _ready() -> void:
 	_load_scenes()
 	reset_relationships()
+	click_sound = load("res://assets/sound/main_game_click.mp3")
+
+
+func play_click_sound() -> void:
+	if click_sound == null:
+		return
+	var player := AudioStreamPlayer.new()
+	player.stream = click_sound
+	player.bus = "Master"
+	add_child(player)
+	player.play()
+	player.finished.connect(player.queue_free)
 
 
 func _load_scenes() -> void:
