@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://dj4la3ihdfgx"]
+[gd_resource type="Theme" format=3 uid="uid://dj4la3ihdfgx"]
 
 [ext_resource type="FontFile" uid="uid://c6ngbxhs1swst" path="res://assets/fonts/Kanit-Regular.ttf" id="1"]
 [ext_resource type="FontFile" uid="uid://dn06eh8wqy1ba" path="res://assets/fonts/Kanit-Medium.ttf" id="3"]

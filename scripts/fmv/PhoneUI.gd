@@ -3,7 +3,7 @@ extends CanvasLayer
 var phone_open: bool = false
 var current_tab: String = "relationship"
 
-var phone_panel: PanelContainer
+var phone_panel: CenterContainer
 var phone_btn: Button
 var close_btn: Button
 var tab_relationship: Button
@@ -48,22 +48,48 @@ func _build_ui() -> void:
 	overlay.gui_input.connect(_on_overlay_input)
 	add_child(overlay)
 
-	# Phone panel (centered, looks like a phone screen)
-	phone_panel = PanelContainer.new()
-	phone_panel.custom_minimum_size = Vector2(500, 700)
+	# Phone panel (CenterContainer to hold the phone background)
+	phone_panel = CenterContainer.new()
+	phone_panel.set_anchors_preset(Control.PRESET_FULL_RECT)
 	phone_panel.visible = false
 	add_child(phone_panel)
 
+	# A wrapper with exact phone size to prevent children from expanding the background
+	var phone_wrapper := Control.new()
+	phone_wrapper.custom_minimum_size = Vector2(360, 750)
+	phone_panel.add_child(phone_wrapper)
+
+	var phone_bg := TextureRect.new()
+	phone_bg.texture = load("res://assets/phone.png")
+	phone_bg.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	phone_bg.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	phone_bg.set_anchors_preset(Control.PRESET_FULL_RECT)
+	phone_wrapper.add_child(phone_bg)
+
 	var margin := MarginContainer.new()
-	margin.add_theme_constant_override("margin_left", 20)
-	margin.add_theme_constant_override("margin_right", 20)
-	margin.add_theme_constant_override("margin_top", 15)
-	margin.add_theme_constant_override("margin_bottom", 15)
-	phone_panel.add_child(margin)
+	# Margin to fit content inside the phone's physical screen area
+	margin.add_theme_constant_override("margin_left", 22)
+	margin.add_theme_constant_override("margin_right", 22)
+	margin.add_theme_constant_override("margin_top", 50)
+	margin.add_theme_constant_override("margin_bottom", 50)
+	margin.set_anchors_preset(Control.PRESET_FULL_RECT)
+	phone_wrapper.add_child(margin)
+
+	# Cool dark background for the screen
+	var screen_bg := ColorRect.new()
+	screen_bg.color = Color(0.08, 0.08, 0.12, 0.98)
+	margin.add_child(screen_bg)
+
+	var screen_margin := MarginContainer.new()
+	screen_margin.add_theme_constant_override("margin_left", 15)
+	screen_margin.add_theme_constant_override("margin_right", 15)
+	screen_margin.add_theme_constant_override("margin_top", 15)
+	screen_margin.add_theme_constant_override("margin_bottom", 15)
+	margin.add_child(screen_margin)
 
 	var vbox := VBoxContainer.new()
 	vbox.add_theme_constant_override("separation", 10)
-	margin.add_child(vbox)
+	screen_margin.add_child(vbox)
 
 	# Header
 	var header := HBoxContainer.new()
@@ -111,6 +137,7 @@ func _build_ui() -> void:
 	# Scrollable content area
 	var scroll := ScrollContainer.new()
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	vbox.add_child(scroll)
 
 	content_container = VBoxContainer.new()
@@ -131,9 +158,7 @@ func _show_phone() -> void:
 	overlay.visible = true
 	phone_panel.visible = true
 
-	# Center the phone panel
-	var vp := get_viewport().get_visible_rect().size
-	phone_panel.position = (vp - phone_panel.custom_minimum_size) / 2.0
+	# CenterContainer handles centering automatically
 
 	get_tree().paused = true
 	_show_tab(current_tab)
