@@ -6,9 +6,12 @@ extends Control
 @onready var btn_about: Button = $MenuPanel/VBox/BtnAbout
 @onready var btn_exit: Button = $MenuPanel/VBox/BtnExit
 @onready var logo: TextureRect = $Logo
+@onready var theme_song_player: AudioStreamPlayer = $ThemeSongPlayer
 
 
 func _ready() -> void:
+	if theme_song_player:
+		theme_song_player.volume_db = linear_to_db(0.75)
 	btn_new_game.pressed.connect(_on_new_game)
 	btn_load.pressed.connect(_on_load)
 	btn_settings.pressed.connect(_on_settings)

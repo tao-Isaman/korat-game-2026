@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dkwtdd8xih1dk" path="res://scripts/fmv/MainMenu.gd" id="1"]
 [ext_resource type="AudioStream" uid="uid://b7nnesqmh2dd4" path="res://assets/sound/themesong.mp3" id="3_audio"]
-[ext_resource type="Texture2D" path="res://assets/girlgroup.png" id="4_bg"]
+[ext_resource type="Texture2D" uid="uid://dgmrk0fpe761b" path="res://assets/girlgroup.png" id="4_bg"]
 [ext_resource type="Texture2D" uid="uid://nj4ia3ihdfgx" path="res://assets/hear in her flow no bg.png" id="5_logo"]
 [ext_resource type="Theme" uid="uid://dj4la3ihdfgx" path="res://assets/theme/main_menu_theme.tres" id="6_theme"]
 

@@ -3,6 +3,7 @@
 		"id": "scene_01",
 		"title": "Scene 1: ก่อนเริ่มเรียน (ห้อง 1500)",
 		"videos": [
+			"res://data/scene_1/entrance.ogv",
 			"res://data/scene 1/walkingtocamera.ogv",
 			"res://data/scene 1/classroom.ogv"
 		],
@@ -38,8 +39,11 @@
 			"res://data/scene_4/walking_out.ogv",
 			"res://data/scene_4/talk_below_building.ogv"
 		],
-
-	
+		"duration": 5.0,
+		"choices": [],
+		"next": "scene_03_toey"
+	},
+	{
 		"id": "scene_03_toey",
 		"title": "Scene 3: ร้านข้าวกับเตย",
 		"videos": [

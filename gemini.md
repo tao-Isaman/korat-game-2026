@@ -33,3 +33,16 @@
 ### [2026-06-07] Push Code to Remote Repository
 - Executed `git add .` to stage the changes including the redesigned buttons (choice_theme.tres, main_menu_theme.tres), bounce animations, wait/click sound integration, scene configuration, and script adjustments.
 - Committed and pushed the changes to the remote repository.
+
+### [2026-06-07] Update Choice Wait Sound to Coffee Stained Letters
+- Changed the background track loaded during choices from `wait_sound.mp3` to `Coffee_Stained_Letters.mp3` in `scripts/fmv/ScenePlayer.gd`.
+- Enabled native loop on the `AudioStreamMP3` stream and kept the signal-based finished restart callback as a fallback.
+- Configured the audio player volume to 10% (using `linear_to_db(0.10)`) to make the background music softer and less intrusive during choices.
+- Configured the Main Menu themesong player volume to 75% (using `linear_to_db(0.75)`) in `scripts/fmv/MainMenu.gd`.
+
+### [2026-06-07] Add Black Screen & Timer Fallback for Scenes without Videos
+- Fixed syntax error in `data/scenes.json` by properly separating `scene_02` and `scene_03_toey` with correct closing/opening braces.
+- Modified `scripts/fmv/ScenePlayer.gd` to display the scene title in white text on a black screen for a default duration of 5 seconds (or custom duration if specified) when a scene does not contain any videos.
+- Increased the font size of the `TitleLabel` in `scenes/fmv/ScenePlayer.tscn` from 32 to 48 for improved readability during the black screen.
+
+

@@ -95,18 +95,15 @@ func _start_scene_logic(data: Dictionary) -> void:
 			phone_ui.show_phone_button()
 			_play_wait_sound()
 	else:
-		# No videos — use duration timer
-		if choices.size() > 0 and duration > 0.0:
+		# No videos — show title on black screen for a duration (defaulting to 5.0s if not specified)
+		var wait_time: float = duration if duration > 0.0 else 5.0
+		if choices.size() > 0:
 			_pending_choices = choices
-			auto_advance_timer.wait_time = duration
+			auto_advance_timer.wait_time = wait_time
 			auto_advance_timer.start()
-		elif choices.size() > 0:
-			choice_overlay.show_choices(choices)
-			phone_ui.show_phone_button()
-			_play_wait_sound()
-		elif duration > 0.0:
+		else:
 			_pending_choices = []
-			auto_advance_timer.wait_time = duration
+			auto_advance_timer.wait_time = wait_time
 			auto_advance_timer.start()
 
 
@@ -320,15 +317,18 @@ func _on_choice_selected(next_scene_id: String) -> void:
 
 func _play_wait_sound() -> void:
 	_stop_wait_sound()
-	var stream: AudioStream = load("res://assets/sound/wait_sound.mp3")
+	var stream = load("res://assets/sound/Coffee_Stained_Letters.mp3")
 	if stream == null:
 		return
+	if stream is AudioStreamMP3:
+		stream.loop = true
 	_wait_sound_player = AudioStreamPlayer.new()
 	_wait_sound_player.stream = stream
 	_wait_sound_player.bus = "Master"
+	_wait_sound_player.volume_db = linear_to_db(0.10)
 	_wait_sound_player.autoplay = true
 	add_child(_wait_sound_player)
-	# Loop: restart when finished
+	# Loop: restart when finished (fallback)
 	_wait_sound_player.finished.connect(_on_wait_sound_finished)
 
 
