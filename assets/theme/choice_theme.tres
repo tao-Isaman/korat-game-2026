@@ -1,4 +1,4 @@
-[gd_resource type="Theme" format=3 uid="uid://dj4la3ihdfgx"]
+[gd_resource type="Theme" format=3 uid="uid://choice_theme_01"]
 
 [ext_resource type="FontFile" uid="uid://c6ngbxhs1swst" path="res://assets/fonts/Kanit-Regular.ttf" id="1"]
 [ext_resource type="FontFile" uid="uid://dn06eh8wqy1ba" path="res://assets/fonts/Kanit-Medium.ttf" id="3"]
@@ -10,13 +10,13 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(1, 1, 1, 1.0)
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
-content_margin_left = 24.0
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+content_margin_left = 36.0
 content_margin_top = 8.0
-content_margin_right = 24.0
+content_margin_right = 36.0
 content_margin_bottom = 8.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hover"]
@@ -26,13 +26,13 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(1, 1, 1, 1.0)
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
-content_margin_left = 24.0
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+content_margin_left = 36.0
 content_margin_top = 8.0
-content_margin_right = 24.0
+content_margin_right = 36.0
 content_margin_bottom = 8.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pressed"]
@@ -42,43 +42,25 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(1, 1, 1, 1.0)
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
-content_margin_left = 24.0
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+content_margin_left = 36.0
 content_margin_top = 8.0
-content_margin_right = 24.0
-content_margin_bottom = 8.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_disabled"]
-bg_color = Color(0.6, 0.45, 0.35, 1.0)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.75, 0.75, 0.75, 1.0)
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
-content_margin_left = 24.0
-content_margin_top = 8.0
-content_margin_right = 24.0
+content_margin_right = 36.0
 content_margin_bottom = 8.0
 
 [resource]
 default_font = ExtResource("1")
-default_font_size = 32
+default_font_size = 36
 Button/colors/font_color = Color(1, 1, 1, 1)
 Button/colors/font_focus_color = Color(1, 1, 1, 1)
 Button/colors/font_hover_color = Color(1, 1, 1, 1)
 Button/colors/font_pressed_color = Color(1, 1, 1, 1)
-Button/colors/font_disabled_color = Color(0.85, 0.85, 0.85, 1)
 Button/fonts/font = ExtResource("3")
 Button/styles/normal = SubResource("StyleBoxFlat_normal")
 Button/styles/hover = SubResource("StyleBoxFlat_hover")
 Button/styles/pressed = SubResource("StyleBoxFlat_pressed")
-Button/styles/disabled = SubResource("StyleBoxFlat_disabled")
 Button/styles/focus = SubResource("StyleBoxFlat_hover")
 Label/fonts/font = ExtResource("1")

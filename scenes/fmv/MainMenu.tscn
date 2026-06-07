@@ -69,29 +69,24 @@ alignment = 1
 [node name="BtnNewGame" type="Button" parent="MenuPanel/VBox" unique_id=2048680973]
 custom_minimum_size = Vector2(320, 65)
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "New Game"
+text = "เริ่มเกม"
 
 [node name="BtnLoad" type="Button" parent="MenuPanel/VBox" unique_id=589056335]
 custom_minimum_size = Vector2(320, 65)
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "Load"
+text = "โหลดเกม"
 
 [node name="BtnSettings" type="Button" parent="MenuPanel/VBox" unique_id=791428890]
 custom_minimum_size = Vector2(320, 65)
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "Settings"
+text = "ตั้งค่า"
 
 [node name="BtnAbout" type="Button" parent="MenuPanel/VBox" unique_id=925541550]
 custom_minimum_size = Vector2(320, 65)
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "About Us"
+text = "เกี่ยวกับ"
 
 [node name="BtnExit" type="Button" parent="MenuPanel/VBox" unique_id=619446598]
 custom_minimum_size = Vector2(320, 65)
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "Exit"
+text = "ออกจากเกม"

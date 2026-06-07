@@ -41,7 +41,7 @@
 
 	
 		"id": "scene_03_toey",
-		"title": "Scene 3: ร้านข้าวกับเตย (ส้มตำโคราช)",
+		"title": "Scene 3: ร้านข้าวกับเตย",
 		"videos": [
 			"res://data/scene_5/restaurant.ogv",
 			"res://data/scene 3/foodmacro.ogv",
@@ -64,7 +64,7 @@
 			{
 				"id": "choice_toey_not_go",
 				"icon": "",
-				"label": "ยังไม่อยากไปเท่าไหร่",
+				"label": "กินข้าวเสร็จแล้วไปคนเดียว",
 				"next": "scene_end_toey_only_eat",
 				"relationship": {
 					"toey": 0

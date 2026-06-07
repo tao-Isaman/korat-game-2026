@@ -93,6 +93,7 @@ func _start_scene_logic(data: Dictionary) -> void:
 		if choices.size() > 0:
 			choice_overlay.show_choices(choices)
 			phone_ui.show_phone_button()
+			_play_wait_sound()
 	else:
 		# No videos — use duration timer
 		if choices.size() > 0 and duration > 0.0:
@@ -102,6 +103,7 @@ func _start_scene_logic(data: Dictionary) -> void:
 		elif choices.size() > 0:
 			choice_overlay.show_choices(choices)
 			phone_ui.show_phone_button()
+			_play_wait_sound()
 		elif duration > 0.0:
 			_pending_choices = []
 			auto_advance_timer.wait_time = duration
@@ -302,6 +304,7 @@ func _on_auto_advance_timeout() -> void:
 	if _pending_choices.size() > 0:
 		choice_overlay.show_choices(_pending_choices)
 		phone_ui.show_phone_button()
+		_play_wait_sound()
 		_pending_choices = []
 	else:
 		var data: Dictionary = GameManager.get_scene(GameManager.current_scene_id)
