@@ -1,13 +1,10 @@
 [
 	{
 		"id": "scene_01",
-		"title": "Scene 1: ก่อนเริ่มเรียน (ห้อง 1500)",
+		"title": "Scene 1: ในห้องแลป",
 		"videos": [
-			"res://data/scene_1/entrance.ogv",
-			"res://data/scene 1/walkingtocamera.ogv",
-			"res://data/scene 1/classroom.ogv"
 		],
-		"loop_video": "res://data/scene 1/waiting.ogv",
+		"loop_video": "",
 		"duration": 5.0,
 		"choices": [
 			{
@@ -34,10 +31,8 @@
 	},
 	{
 		"id": "scene_02",
-		"title": "Scene 2: จุดแยกหน้าอาคารเรียน (เตยชวนกินข้าว)",
+		"title": "Scene 2: หน้าห้องแลป",
 		"videos": [
-			"res://data/scene_4/walking_out.ogv",
-			"res://data/scene_4/talk_below_building.ogv"
 		],
 		"duration": 5.0,
 		"choices": [],
@@ -47,19 +42,14 @@
 		"id": "scene_03_toey",
 		"title": "Scene 3: ร้านข้าวกับเตย",
 		"videos": [
-			"res://data/scene_5/restaurant.ogv",
-			"res://data/scene 3/foodmacro.ogv",
-			"res://data/scene_5/talking_culture_korat.ogv",
-			"res://data/scene_5/vdo_korat_merit.ogv",
-			"res://data/scene_5/vdo_korat_katin.ogv"
 		],
-		"loop_video": "res://data/scene_5/toey_invite_loop.ogv",
+		"loop_video": "",
 		"duration": 5.0,
 		"choices": [
 			{
 				"id": "choice_toey_go_event",
 				"icon": "",
-				"label": "ไปงานมหาลัยกับเตย",
+				"label": "ไปลานย่าโมกับเตย",
 				"next": "scene_end_sut36",
 				"relationship": {
 					"toey": 15
@@ -68,7 +58,7 @@
 			{
 				"id": "choice_toey_not_go",
 				"icon": "",
-				"label": "กินข้าวเสร็จแล้วไปคนเดียว",
+				"label": "หาเวลาไปคนเดียว",
 				"next": "scene_end_toey_only_eat",
 				"relationship": {
 					"toey": 0
@@ -80,10 +70,8 @@
 		"id": "scene_meet_pang",
 		"title": "Scene 2.1: บังเอิญเจอแป้งระหว่างทาง",
 		"videos": [
-			"res://data/scene_pang/meet_pang.ogv",
-			"res://data/scene_pang/pang_invite_lib.ogv"
 		],
-		"loop_video": "res://data/scene_pang/meet_pang_loop.ogv",
+		"loop_video": "",
 		"duration": 5.0,
 		"choices": [
 			{
@@ -110,12 +98,8 @@
 		"id": "scene_pang_library",
 		"title": "Scene 2.2: หอสมุดกับแป้ง (วัฒนธรรมขอนแก่น)",
 		"videos": [
-			"res://data/scene_pang/library_sit.ogv",
-			"res://data/scene_pang/vdo_khonkaen_phrathat.ogv",
-			"res://data/scene_pang/vdo_khonkaen_silk.ogv",
-			"res://data/scene_pang/vdo_khonkaen_siu.ogv"
 		],
-		"loop_video": "res://data/scene_pang/pang_invite_event_loop.ogv",
+		"loop_video": "",
 		"duration": 5.0,
 		"choices": [
 			{
@@ -142,8 +126,6 @@
 		"id": "scene_end_sut36",
 		"title": "Happy End: บรรยากาศงานฉลอง 36 ปี มทส.",
 		"videos": [
-			"res://data/scene_7/sut36_festival.ogv",
-			"res://data/scene_7/walking_together.ogv"
 		],
 		"duration": 5.0,
 		"choices": [],
@@ -153,7 +135,6 @@
 		"id": "scene_end_toey_only_eat",
 		"title": "End: กินข้าวเสร็จแล้วแยกย้าย",
 		"videos": [
-			"res://data/scene_5/toey_eat_finish.ogv"
 		],
 		"duration": 3.0,
 		"choices": [],
